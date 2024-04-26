@@ -1,0 +1,70 @@
+CREATE TABLE Поставщики (
+    ID_Поставщика int NOT NULL,
+    Фамилия varchar(50) NOT NULL,
+    Имя varchar(50) NOT NULL,
+    Отчество varchar(50) NOT NULL,
+    Телефон int NOT NULL,
+    Адрес varchar(50),
+    Почта varchar(50),
+    PRIMARY KEY (ID_Поставщика),
+);
+
+CREATE TABLE Товар (
+    ID_Товара int NOT NULL,
+    Категория varchar(50) NOT NULL,
+    Фирма varchar(50) NOT NULL,
+    Название varchar(50) NOT NULL,
+    Цвет varchar(50) NOT NULL,
+    В наличии int NOT NULL,
+    Изображение BLOB NOT NULL,
+    Цена int NOT NULL,
+    ID_Поставщика varchar(50),
+    PRIMARY KEY (ID_Товара),
+    FOREIGN KEY (ID_Поставщика) REFERENCES Поставщики(ID_Поставщика)
+);
+
+CREATE TABLE Покупатель (
+    ID_Покупателя int NOT NULL,
+    Имя varchar(50) NOT NULL,
+    Фамилия varchar(50) NOT NULL,
+    Отчество varchar(50),
+    Дата рождения data NOT NULL,
+    Город varchar(50),
+    Телефон  int NOT NULL,
+    PRIMARY KEY (ID_Покупателя)
+);
+
+CREATE TABLE Отчеты (
+    ID_Отчета int NOT NULL,
+    ID_Сотрудника int NOT NULL,
+    Период data NOT NULL,
+    Доходы int NOT NULL,
+    Расходы int NOT NULL,
+    Итог int NOT NULL,
+    PRIMARY KEY (ID_Отчета)
+);
+
+CREATE TABLE Сотрудники (
+    ID_Сотруднтка int NOT NULL,
+    Фамилия varchar(50) NOT NULL,
+    Имя varchar(50) NOT NULL,
+    Отчество varchar(50) NOT NULL,
+    Должность varchar(50) NOT NULL,
+    PRIMARY KEY (ID_Сотрудника)
+);
+
+CREATE TABLE Заказы (
+    ID_Заказа int NOT NULL,
+    ID_Покупателя int NOT NULL,
+    ID_Товара int NOT NULL,
+    Количество
+    Стоимость
+    Дата заказа
+    ID_Сотрудника
+    ID_Отчета
+    PRIMARY KEY (ID_Заказа),
+	FOREIGN KEY (ID_Товара) REFERENCES Товар(ID_Товара),
+	FOREIGN KEY (ID_Покупателя) REFERENCES Покупатель(ID_Покупателя)
+	FOREIGN KEY (ID_Сотрудника) REFERENCES Сотрудники(ID_Сотрудника),
+	FOREIGN KEY (ID_Отчета) REFERENCES Отчеты(ID_Отчета)
+);
